@@ -1,0 +1,9 @@
+.header {
+    display: inline-flex;
+    color: blue;
+    
+}
+
+.bar {
+    padding: 30px;;
+}

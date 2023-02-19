@@ -1,3 +1,10 @@
 .cardDiv {
-    background-color: beige;
+    /* background-color: bisque; */
+    width: auto;
+    height: 100px;
+    padding: 10px;
+    
+}
+.flag{
+    height: 100px;
 }

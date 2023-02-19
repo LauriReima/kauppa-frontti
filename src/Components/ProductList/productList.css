@@ -1,0 +1,8 @@
+
+.grid{
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 20px;
+    border: 10px;
+}

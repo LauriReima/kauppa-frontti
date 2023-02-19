@@ -1,9 +1,12 @@
 import React from 'react';
+import Search from './Search/Search';
+import './header.css'
 
-function Header(props) {
+function Header({input}) {
     return (
-        <div>
+        <div className='header'>
             <h1>Hello</h1>
+            <Search input={input}/>
         </div>
     );
 }

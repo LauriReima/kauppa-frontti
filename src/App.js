@@ -5,10 +5,16 @@ import ProductList from './Components/ProductList/ProductList';
 
 
 function App() {
+
+  const handleChange = (e) => {
+    e.preventDefault()
+    console.log(e.target.value);
+    return e.target.value
+  }
   return (
     <>
-    <Header/>
-    <ProductList />
+    <Header input={handleChange}/>
+    <ProductList input={handleChange}/>
     </>
   );
 }
