@@ -15,7 +15,6 @@ function useProduct(keyword) {
     //         p.name.common.toLowerCase().search(keyword.toLowerCase()) 
     //     )
     // })
-    
     return product
 }
 

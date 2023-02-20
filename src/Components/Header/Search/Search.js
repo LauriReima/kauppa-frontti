@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Search = ({input}) => {
+const Search = ({search}) => {
     
     return (
         <div className='bar'>
-            <input onChange={input} />
-            <button>Search</button>
+            <input onChange={search} />
+            <button >Search</button>
         </div>
     );
 };

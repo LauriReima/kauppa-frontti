@@ -3,23 +3,29 @@ import Card from '../Card/Card';
 import './productList.css'
 import useProduct from '../../hooks/useProduct';
 
-const ProductList = ({input}) => {
+
+const ProductList = ({input, order}) => {
     const product = useProduct(input)
-    const Sorter = (alg) => {
-        if (alg === 'pop') {
-            const popu = product.sort((a,b) => a.population < b.population)
-            return popu
+    const filtered = product.filter(p => {
+        return p.name.common.toLowerCase().match(input)
+    })
+    console.log(input);
+    const sorter = (alg) => {
+        if (alg === 'population') {
+            return filtered.sort((a,b) => a.population < b.population)
         }
+        else if (alg === 'name'){
+            return filtered.sort((a,b) => a.name.common > b.name.common)     
+        } 
+        //else return [...product].sort((a,b) => a.name.common - b.name.common)
+        //return product.sort((a,b) => a.name.common > b.name.common) 
+        
     }
-    
-    
-     const alphabet = product.sort((a,b) => a.name.common > b.name.common)
-    // const neg = product.sort((a,b) => a.name.common < b.name.common)
-   // console.log(popu.map(p => p.name.common), 'popu');
+    console.log(filtered, 'filt');
     if (product.length > 0){
         return (
         <div className='grid'>
-            {alphabet.map((p) => (
+            {sorter(order).map((p) => (
             <Card 
                 key={p.cca2}
                 name={p.name.common}
