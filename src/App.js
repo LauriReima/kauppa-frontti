@@ -1,15 +1,25 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Components/Header/Header';
 import ProductList from './Components/ProductList/ProductList';
+import axios from 'axios';
+import getAll from './services/product';
 
 
 
 function App() {
   const [order, setOrder] = useState('name')
   const [searchInput, setSearchInput] = useState('')
+  const [product, setProduct] = useState([])
 
-  //console.log(searchInput);
+  useEffect(() => {
+    //axios.get('https://restcountries.com/v3.1/all')
+    getAll()
+    .then(res => {
+        setProduct(res)
+    })
+  }, [])
+  console.log(product, 'pro');
   const handleChange = (e) => {
     e.preventDefault()
     setSearchInput(e.target.value)
@@ -28,7 +38,7 @@ function App() {
     <ProductList 
           input={searchInput}
           order={order}
-          
+          product={product}
           />
     </>
   );

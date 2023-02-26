@@ -5,7 +5,6 @@ const Search = ({search}) => {
     return (
         <div className='bar'>
             <input onChange={search} />
-            <button >Search</button>
         </div>
     );
 };
