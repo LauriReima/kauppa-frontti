@@ -15,26 +15,28 @@ const ProductList = ({input, order, product}) => {
     //         return filtered.sort((a,b) => a.name.common > b.name.common)     
     //     } 
     // }
-    // console.log(product.length);
-    // if (product.length > 0){
-    //     return (
-    //     <div className='grid'>
-    //         {sorter(order).map((p) => (
-    //         <Card 
-    //             key={p.cca2}
-    //             name={p.name.common}
-    //             capital={p.capital}
-    //             flag={p.flags.png} 
-    //         />
-    //         ))}
-    //     </div>
-    // );
-    // }else {
+    console.log(product.length);
+    if (product.length > 0){
+        return (
+        <div className='grid'>
+            {
+            //sorter(order)
+            product.map((p) => (
+            <Card 
+                key={p.id}
+                name={p.content}
+                importance={p.important}
+                //flag={p.flags.png} 
+            />
+            ))}
+        </div>
+    );
+    }else {
         return (
             <h1>loading</h1>
         )
     }
     
-//};
+};
 
 export default ProductList;

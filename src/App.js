@@ -10,14 +10,14 @@ function App() {
   const [order, setOrder] = useState('name')
   const [searchInput, setSearchInput] = useState('')
   const [product, setProduct] = useState([])
-  console.log(searchInput);
+  
   useEffect(() => {
     getAll()
     .then(res => {
         setProduct(res)
     })
   }, [])
-  
+  console.log(product, 'apppro');
   const handleChange = (e) => {
     e.preventDefault()
     setSearchInput(e.target.value)
