@@ -3,10 +3,10 @@ import Card from '../Card/Card';
 import './productList.css'
 
 
-const ProductList = ({input, order, product}) => {
-    // const filtered = product.filter(p => {
-    //     return p.name.common.toLowerCase().match(input)
-    // })
+const ProductList = ({input, order, product, deleteP}) => {
+    const filtered = product.filter(p => {
+        return p.content.toLowerCase().match(input)
+    })
     // const sorter = (alg) => {
     //     if (alg === 'population') {
     //         return filtered.sort((a,b) => a.population < b.population)
@@ -15,17 +15,20 @@ const ProductList = ({input, order, product}) => {
     //         return filtered.sort((a,b) => a.name.common > b.name.common)     
     //     } 
     // }
+    
     console.log(product.length);
     if (product.length > 0){
         return (
         <div className='grid'>
             {
             //sorter(order)
-            product.map((p) => (
+            filtered.map((p) => (
             <Card 
                 key={p.id}
+                id={p.id}
                 name={p.content}
                 importance={p.important}
+                deleteP={deleteP}
                 //flag={p.flags.png} 
             />
             ))}

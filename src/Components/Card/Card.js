@@ -1,7 +1,7 @@
 import React from 'react';
 import './card.css'
 
-function Card({name, importance, flag}) {
+function Card({name, importance, flag, id, deleteP}) {
 
     const important = (!importance) ? "eipä kovinkaan" : "tärkeää"
     const styles = {
@@ -29,9 +29,10 @@ function Card({name, importance, flag}) {
                 <div className='cardDiv' style={styles.card}>
                     
                     <h1 style={styles.content}>{name}</h1>
-                    {/* <Importante importance={importance}/> */}
                     <h3>{important}</h3>
                     <img className='flag' src={flag} alt='flag' style={styles.flag}/>
+                    <br></br>
+                    <button onClick={() => deleteP(id)}>delete</button>
                 </div>
             </>
         )
