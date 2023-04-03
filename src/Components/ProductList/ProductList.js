@@ -5,7 +5,7 @@ import './productList.css'
 
 const ProductList = ({input, order, product, deleteP}) => {
     const filtered = product.filter(p => {
-        return p.content.toLowerCase().match(input)
+        return p.name.toLowerCase().match(input)
     })
     // const sorter = (alg) => {
     //     if (alg === 'population') {
@@ -26,8 +26,10 @@ const ProductList = ({input, order, product, deleteP}) => {
             <Card 
                 key={p.id}
                 id={p.id}
-                name={p.content}
-                importance={p.important}
+                name={p.name}
+                price={p.price}
+                category={p.category}
+                image={p.image}
                 deleteP={deleteP}
                 //flag={p.flags.png} 
             />

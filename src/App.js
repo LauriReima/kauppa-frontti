@@ -13,7 +13,7 @@ function App() {
   const [product, setProduct] = useState([])
   const [newProduct, setNewProduct] = useState('')
   
-  useEffect(() => {
+  useEffect(() => {  
     productService.getAll()
     .then(res => {
         setProduct(res)
@@ -41,7 +41,7 @@ function App() {
     })
     setNewProduct('')
   }
-  const deletePro = (id)  => {
+  const deleteProduct = (id)  => {
     const newList = product.filter(p => p.id !== id)
     productService.deleteProduct(id).then(
       setProduct(newList)
@@ -61,11 +61,12 @@ function App() {
           addProduct={addProduct}
           product={newProduct}
           />
+    
     <ProductList 
           input={searchInput}
           order={order}
           product={product}
-          deleteP={deletePro}
+          deleteP={deleteProduct}
           />
     </>
   );
