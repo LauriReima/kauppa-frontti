@@ -5,9 +5,10 @@ import './navbar.css'
 const NavBar = () => {
     return (
         <div className='nav'>
-            <Link to='/' >Home</Link>
-            <Link to='/login' >Login</Link>
-            <Link to='/form' >Add Products</Link>
+            <h1>hello</h1>
+            {/* <Link to='/' >Home</Link> */}
+            {/* <Link to='/login' >Login</Link>
+            <Link to='/form' >Add Products</Link> */}
         </div>
     );
 };

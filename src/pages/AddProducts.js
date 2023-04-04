@@ -3,11 +3,17 @@ import AddForm from '../Components/Header/AddForm/AddForm';
 import NavBar from '../Components/Header/NavBar/NavBar';
 
 
-const AddProducts = () => {
+const AddProducts = ({addProduct, handleAddName, inputName,handleCategory, inputCategory}) => {
     return (
         <div>
             <NavBar />
-            <AddForm />
+            <AddForm 
+                addProduct={addProduct}
+                handleAddName={handleAddName} 
+                inputName={inputName}   
+                handleCategory={handleCategory}
+                inputCategory={inputCategory}
+            />
         </div>
     );
 };
