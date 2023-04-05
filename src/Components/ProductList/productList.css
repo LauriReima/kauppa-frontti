@@ -6,3 +6,12 @@
     gap: 20px;
     border: 10px;
 }
+
+.loginInput {
+    margin:5px;
+    position: absolute;
+    display: inline;
+
+    top: 0;
+    right: 250px;
+  }

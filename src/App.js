@@ -1,14 +1,11 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import {
-  createBrowserRouter,
-  RouterProvider,
   Routes,
   BrowserRouter as Router,
   Link,
   Route
 } from "react-router-dom";
-import Header from './Components/Header/Header';
 import ProductList from './Components/ProductList/ProductList';
 import productService from './services/product';
 import LoginPage from './pages/LoginPage';
@@ -22,6 +19,10 @@ function App() {
   const [product, setProduct] = useState([])
   const [newProductName, setNewProductName] = useState('')
   const [newCategory, setNewCategory] = useState('none')
+  const [newPrice, setNewPrice] = useState(0)
+  const [token, setToken] = useState()
+  const [userName, setUserName] = useState()
+  const [password, setPassword] = useState()
   
   useEffect(() => {  
     productService.getAll()
@@ -30,10 +31,13 @@ function App() {
     })
   }, [])
 
-  //console.log(product, 'apppro');
   const handleChange = (e) => {
     e.preventDefault()
     setSearchInput(e.target.value)
+  }
+  const handlePrice = (e) => {
+    e.preventDefault()
+    setNewPrice(e.target.value)
   }
   const handleCategory = (e) => {
     e.preventDefault()
@@ -42,21 +46,33 @@ function App() {
   const handleAddName = (e) => {
     e.preventDefault()
     setNewProductName(e.target.value);
-    //console.log(e.target.value);
+  }
+  const handleUserName = (e) => {
+    e.preventDefault()
+    setUserName(e.target.value);
+  } 
+  const handlePassword = (e) => {
+    e.preventDefault()
+    setPassword(e.target.value);
   }
   const addProduct = (e) => {
     e.preventDefault()
     const productObject = {
       name: newProductName,
-      price: 13,
+      price: newPrice,
       category: newCategory    
     }
-    productService.create(productObject).then(pr => {
+    if (!productObject.name | productObject.price < 1 | productObject.category === 'none'){
+      window.alert('Tarkista lisäys!!')
+    } else{
+      productService.create(productObject).then(pr => {
       setProduct(product.concat(pr))
-
     })
+    }
+    
     setNewProductName('')
     setNewCategory('none')
+    setNewPrice(0)
   }
   const deleteProduct = (id)  => {
     const newList = product.filter(p => p.id !== id)
@@ -72,18 +88,21 @@ function App() {
   return (
     <>
     <Router>
-      <div>
+      <div className='nav'>
         <Link to='/'>Home</Link>
-        <Link to='/login'>Login</Link>
-        <Link to='/add'>Add</Link>
-        <button onClick={addProduct} >lisää</button>
+        <Link to='/login'>Register</Link>
+        <Link to='/add'>Add</Link> 
       </div>
       <Routes>
         <Route path='/' element={<ProductList 
           input={searchInput}
           //order={order}
           product={product}
-          deleteP={deleteProduct}/>} />
+          deleteP={deleteProduct}/>} 
+          token={token}
+          handleUserName={handleUserName}
+          handlePassword={handlePassword}
+          />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/add" element={
@@ -93,6 +112,8 @@ function App() {
             inputName={newProductName}
             handleCategory={handleCategory}
             inputCategory={newCategory}
+            handlePrice={handlePrice}
+            inputPrice={newPrice}
           />} />
       </Routes>
     </Router>

@@ -1,13 +1,20 @@
 import React from 'react';
-import NavBar from '../Components/Header/NavBar/NavBar';
 
 const LoginPage = () => {
+
     return (
         <>
-            <NavBar />
             <div>
                 <form>
-                    <input type="text" name="username" placeholder='Enter your username' />                
+                    <label>
+                        <p>Username:</p>
+                        <input type="text" name="username" placeholder='Enter your username' />
+                    </label>
+                    <label>
+                        <p>Password:</p>
+                        <input type="text" name="password" placeholder='Enter your password' />  
+                    </label> 
+                    <button type='submit'>Submit</button>        
                 </form>
             </div>
         </>

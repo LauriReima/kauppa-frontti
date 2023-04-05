@@ -1,0 +1,10 @@
+.bar {
+    position: relative;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    height:100vh;
+}

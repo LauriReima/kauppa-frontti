@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import Search from './Search/Search';
-import AddForm from './AddForm/AddForm'
 import Dropdown from './Dropdown/Dropdown';
 import './header.css'
-import { Link } from 'react-router-dom';
-import NavBar from './NavBar/NavBar';
+
 
 function Header({input, search, addInput, addProduct, product}) {
     const [dropBox, setDropBox] = useState(false)
@@ -29,7 +27,6 @@ function Header({input, search, addInput, addProduct, product}) {
                 addProduct={addProduct}
                 value={product}
                 /> */}
-            <NavBar />
         </div>
     );
 }

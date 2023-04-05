@@ -3,7 +3,7 @@ import Card from '../Card/Card';
 import './productList.css'
 
 
-const ProductList = ({input, order, product, deleteP}) => {
+const ProductList = ({input, token, product, deleteP, handleUserName, handlePassword}) => {
     const filtered = product.filter(p => {
         return p.name.toLowerCase().match(input)
     })
@@ -11,6 +11,18 @@ const ProductList = ({input, order, product, deleteP}) => {
     console.log(product.length);
     if (product.length > 0){
         return (
+        <>
+        { !token ?
+            <form className='loginInput' >
+              <button type='submit'>Login</button>
+              <input type="text" name="username" placeholder='Enter your username' onClick={handleUserName}/>
+              <input type="text" name="password" placeholder='Enter your password' onClick={handlePassword}/> 
+            </form>
+       :
+            <div>
+                <p>Logged in</p>
+            </div>
+    }
         <div className='grid'>
             {
             //sorter(order)
@@ -27,6 +39,7 @@ const ProductList = ({input, order, product, deleteP}) => {
             />
             ))}
         </div>
+        </>
     );
     }else {
         return (
