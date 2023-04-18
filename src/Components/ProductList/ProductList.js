@@ -1,28 +1,26 @@
 import React from 'react';
 import Card from '../Card/Card';
+import Search from '../Header/Search/Search'
 import './productList.css'
 
 
-const ProductList = ({input, token, product, deleteP, handleUserName, handlePassword}) => {
+const ProductList = ({input,  product, deleteP, handleSearch}) => {
     const filtered = product.filter(p => {
         return p.name.toLowerCase().match(input)
     })
+    const sorted = filtered.map((s) => 
+        s.name.toLowerCase()
+    )
+    
     
     console.log(product.length);
     if (product.length > 0){
         return (
         <>
-        { !token ?
-            <form className='loginInput' >
-              <button type='submit'>Login</button>
-              <input type="text" name="username" placeholder='Enter your username' onClick={handleUserName}/>
-              <input type="text" name="password" placeholder='Enter your password' onClick={handlePassword}/> 
-            </form>
-       :
-            <div>
-                <p>Logged in</p>
-            </div>
-    }
+        <Search 
+            input={input}
+            handleSearch={handleSearch}
+            />
         <div className='grid'>
             {
             //sorter(order)

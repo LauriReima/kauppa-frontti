@@ -1,6 +1,54 @@
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0px;
+  padding: 0 px;
+  margin: 0 px;
 }
+
+.nav{
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  height: 40px;
+  align-items: center;
+}
+
+.link {
+  font-size: 20px;
+}
+.loginInput {
+  height: 40px; 
+  display: flex;
+}
+.loginInput > input {
+  border-radius: 6px;
+  
+}
+.loginInput > button {
+  background-color: rgb(192, 41, 41);
+  width: 80px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.loginInput > button:hover {
+  background-color: rgb(171, 161, 161);
+ 
+}
+.searchBar{
+  text-align: center;
+}
+.searchBar > input{
+  width: 60%;
+  border-radius: 6px;
+
+}
+
 

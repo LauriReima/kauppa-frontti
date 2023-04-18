@@ -8,8 +8,10 @@ import {
 } from "react-router-dom";
 import ProductList from './Components/ProductList/ProductList';
 import productService from './services/product';
-import LoginPage from './pages/LoginPage';
+import userService from './services/user'
+import RegisterPage from './pages/RegisterPage';
 import AddProducts from './pages/AddProducts';
+import Login from './Components/Login/Login';
 
 
 
@@ -21,9 +23,12 @@ function App() {
   const [newCategory, setNewCategory] = useState('none')
   const [newPrice, setNewPrice] = useState(0)
   const [token, setToken] = useState()
-  const [userName, setUserName] = useState()
-  const [password, setPassword] = useState()
-  
+  const [users, setUsers] = useState([])
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  const [registerName, setRegisterName] = useState('')
+  const [registerPassword, setRegisterPassword] = useState('')
+
   useEffect(() => {  
     productService.getAll()
     .then(res => {
@@ -31,7 +36,7 @@ function App() {
     })
   }, [])
 
-  const handleChange = (e) => {
+  const handleSearchChange = (e) => {
     e.preventDefault()
     setSearchInput(e.target.value)
   }
@@ -55,6 +60,20 @@ function App() {
     e.preventDefault()
     setPassword(e.target.value);
   }
+  const handleRegisterName = (e) => {
+    e.preventDefault()
+    setRegisterName(e.target.value);
+  } 
+  const handleRegisterPassword = (e) => {
+    e.preventDefault()
+    setRegisterPassword(e.target.value);
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    localStorage.setItem(userName, password)
+    setUserName('')
+    setPassword('')
+}
   const addProduct = (e) => {
     e.preventDefault()
     const productObject = {
@@ -80,31 +99,63 @@ function App() {
       setProduct(newList)
     )
   }
+  const registerUser = (e) => {
+    e.preventDefault()
+    const userObject = {
+      username: registerName,
+      password: registerPassword
+    }
+    if (userObject.username === '' | userObject.password === ''){
+      window.alert('Täytä molemmat inputit')
+    } else {
+      userService.create(userObject).then(u => {
+        setUsers(users.concat(u))
+      })
+    }
+    setRegisterName('')
+    setRegisterPassword('')
+  }
+
   // const changeOrder = (e) => {
   //   //console.log(e.target.value);
   //   setOrder(e.target.value)
   // }
-  
+
   return (
     <>
     <Router>
       <div className='nav'>
-        <Link to='/'>Home</Link>
-        <Link to='/login'>Register</Link>
-        <Link to='/add'>Add</Link> 
+        <div className='links'>
+          <Link className='link' to='/'>Home</Link>
+          <Link className='link' to='/login'>Register</Link>
+          <Link className='link' to='/add'>Add</Link> 
+        </div>
+          
+           <Login 
+            token={token}
+            handleUserName={handleUserName}
+            user={userName}
+            handlePassword={handlePassword}
+            password={password}
+            submit={handleSubmit}
+            /> 
+         
       </div>
       <Routes>
         <Route path='/' element={<ProductList 
           input={searchInput}
-          //order={order}
+          handleSearch={handleSearchChange}
           product={product}
           deleteP={deleteProduct}/>} 
-          token={token}
-          handleUserName={handleUserName}
-          handlePassword={handlePassword}
           />
 
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<RegisterPage 
+          registerUser={registerUser}
+          userName={registerName}
+          password={registerPassword}
+          handlePW={handleRegisterPassword}
+          handleName={handleRegisterName}
+        />} />
         <Route path="/add" element={
           <AddProducts 
             addProduct={addProduct} 
