@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import Search from './Search/Search';
-import Dropdown from './Dropdown/Dropdown';
+import { Link } from 'react-router-dom';
 import './header.css'
 
 
-function Header({input, search, addInput, addProduct, product}) {
+function Header({admin}) {
     const [dropBox, setDropBox] = useState(false)
 
     const toggleDrop = () => {
@@ -12,21 +11,23 @@ function Header({input, search, addInput, addProduct, product}) {
     }
     return (
         <div className='header'>
-           
-            <button onClick={() => toggleDrop()}>sivuvalikko</button>
-            {dropBox ? 
-            <Dropdown toggleDropBox={toggleDrop}/> 
-            : ''}
-            <Search search={search}/>
-            <select name='order' id='order' onChange={input}>Order
-                <option value='name'>ABC</option>
-                <option value='population'>Population</option>
-            </select>
-            {/* <AddForm 
-                addInput={addInput}
-                addProduct={addProduct}
-                value={product}
-                /> */}
+            <button className='dropbtn' onClick={toggleDrop}>Menu</button>
+            <div className='header-links'>
+                <Link className='link' to='/'>Home</Link>
+                {!admin ?
+                <Link className='link' to='/login'>Register</Link> :
+                <Link className='link' to='/add'>Add</Link>   
+                }
+            </div>
+            <div className='dropdown'>
+                <div className={`dropdown-content ${dropBox ? 'show' : ''}`}>
+                    <Link className='link' to='/'>Home</Link>
+                    {!admin ?
+                    <Link className='link' to='/login'>Register</Link> :
+                    <Link className='link' to='/add'>Add</Link>   
+                    }
+                </div>
+            </div>
         </div>
     );
 }

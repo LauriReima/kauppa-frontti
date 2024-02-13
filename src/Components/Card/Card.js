@@ -1,7 +1,7 @@
 import React from 'react';
 import './card.css'
 
-function Card({name, price, category, image, id, deleteP}) {
+function Card({name, price, category, image, id, deleteP, user}) {
 
     //const important = (!importance) ? "eipä kovinkaan" : "tärkeää"
     const styles = {
@@ -26,7 +26,7 @@ function Card({name, price, category, image, id, deleteP}) {
                     <p>{category}</p>
                     <img className='flag' src={image} alt='kuva' style={styles.flag}/>
                     <br></br>
-                    <button onClick={() => deleteP(id)}>delete</button>
+                    {user !== null && user.username === 'lauri' ? <button onClick={() => deleteP(id)}>delete</button> : ''}
                 </div>
             </>
         )

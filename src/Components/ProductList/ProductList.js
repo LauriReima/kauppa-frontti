@@ -4,7 +4,7 @@ import Search from '../Header/Search/Search'
 import './productList.css'
 
 
-const ProductList = ({input,  product, deleteP, handleSearch}) => {
+const ProductList = ({input,  product, deleteP, handleSearch, user}) => {
     const filtered = product.filter(p => {
         return p.name.toLowerCase().match(input)
     })
@@ -13,7 +13,7 @@ const ProductList = ({input,  product, deleteP, handleSearch}) => {
     )
     
     
-    console.log(product.length);
+    
     if (product.length > 0){
         return (
         <>
@@ -33,6 +33,7 @@ const ProductList = ({input,  product, deleteP, handleSearch}) => {
                 category={p.category}
                 image={p.image}
                 deleteP={deleteP}
+                user={user}
                 //flag={p.flags.png} 
             />
             ))}

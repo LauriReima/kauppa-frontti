@@ -1,20 +1,17 @@
 import React from 'react';
 
-const Login = ({token, handleUserName, handlePassword, password, user, submit}) => {
+const Login = ({logged, handleUserName, handlePassword, password, user, submit}) => {
 
     return (
         <>
-            { !token ?
-            <form className='loginInput' >
-              <button type='submit' onClick={submit}>Login</button>
-              <input type="text" name="username" placeholder='Enter your username' onChange={handleUserName}/>
-              <input type="password" name="password" placeholder='Enter your password' onChange={handlePassword}/> 
+            <form className='loginInput' onSubmit={submit}>
+              
+              <input type="text" name="username" placeholder='Enter your username' onChange={handleUserName} value={user}/>
+              <input type="password" name="password" placeholder='Enter your password' onChange={handlePassword} value={password}/> 
+              <button type='submit' >Login</button>
             </form>
-       :
-            <div>
-                <p>Logged in</p>
-            </div>
-    }
+            
+
         </>
     );
 };

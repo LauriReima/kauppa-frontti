@@ -6,7 +6,7 @@ const AddForm = ({handleAddName, inputName, addProduct, handleCategory, inputCat
 
     return (
         <div className='bar' >
-            <form onSubmit={addProduct}>
+            <form onSubmit={addProduct} className='addForm'>
                 <label>
                     <p>Nimi: </p>
                     <input value={inputName} onChange={handleAddName}/>  

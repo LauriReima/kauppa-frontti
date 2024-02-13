@@ -7,7 +7,7 @@ const localURL = '/api/notes/'
 const getAll = async () => {
     const req = axios.get(products)
     const res = await req
-    return res.data
+    return res
 }
 
 const create = async (product) => {

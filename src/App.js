@@ -4,14 +4,18 @@ import {
   Routes,
   BrowserRouter as Router,
   Link,
-  Route
+  Route,
+  Navigate,
 } from "react-router-dom";
 import ProductList from './Components/ProductList/ProductList';
 import productService from './services/product';
 import userService from './services/user'
+import loginService from './services/login'
 import RegisterPage from './pages/RegisterPage';
 import AddProducts from './pages/AddProducts';
 import Login from './Components/Login/Login';
+import user from './services/user';
+import Header from './Components/Header/Header';
 
 
 
@@ -24,16 +28,33 @@ function App() {
   const [newPrice, setNewPrice] = useState(0)
   const [token, setToken] = useState()
   const [users, setUsers] = useState([])
-  const [userName, setUserName] = useState('')
+  const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [registerName, setRegisterName] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
+  const [loggedUser, setLoggedUser] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [admin, setAdmin] = useState(false)
 
   useEffect(() => {  
     productService.getAll()
     .then(res => {
-        setProduct(res)
+        setProduct(res.data)
+        //console.log(res.data);
     })
+    userService.getAll()
+    .then(res => {
+      setUsers(res)
+    })
+  }, [])
+
+  useEffect(() => {
+    const loggedUserJSON = localStorage.getItem('loggedUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setLoggedUser(user)
+      console.log(user.username);
+    }
   }, [])
 
   const handleSearchChange = (e) => {
@@ -68,12 +89,6 @@ function App() {
     e.preventDefault()
     setRegisterPassword(e.target.value);
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    localStorage.setItem(userName, password)
-    setUserName('')
-    setPassword('')
-}
   const addProduct = (e) => {
     e.preventDefault()
     const productObject = {
@@ -101,19 +116,63 @@ function App() {
   }
   const registerUser = (e) => {
     e.preventDefault()
+    
     const userObject = {
       username: registerName,
       password: registerPassword
     }
-    if (userObject.username === '' | userObject.password === ''){
+    
+    if (userObject.username === '' || userObject.password === ''){
       window.alert('Täytä molemmat inputit')
-    } else {
+    }
+    else if (users.some(u => u.username === userObject.username)){
+      window.alert('Käyttäjänimi varattu')
+    }  
+    else if(userObject.password.length < 4) {
+      window.alert('Salasana liian heikko')
+    }
+    else {
       userService.create(userObject).then(u => {
         setUsers(users.concat(u))
+        setRegisterName('')
+        setRegisterPassword('')
+
+        //navigate('/')
       })
     }
-    setRegisterName('')
-    setRegisterPassword('')
+  }
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    
+    try {
+      const user = await loginService.login({
+        username, password
+      })
+      localStorage.setItem(
+        'loggedUser', JSON.stringify(user)
+      )
+      setLoggedUser(user)
+      setUserName('')
+      setPassword('')
+      if (user.username === 'lauri') {
+        setAdmin(true)
+      }
+      
+    } catch (exeption) {
+      setErrorMessage('wrong credentials')
+      setUserName('')
+      setPassword('')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+  const handleLogout =  (e) => {
+    e.preventDefault()
+    setLoggedUser(null)
+    setAdmin(false)
+    localStorage.clear()
   }
 
   // const changeOrder = (e) => {
@@ -125,28 +184,37 @@ function App() {
     <>
     <Router>
       <div className='nav'>
-        <div className='links'>
-          <Link className='link' to='/'>Home</Link>
-          <Link className='link' to='/login'>Register</Link>
-          <Link className='link' to='/add'>Add</Link> 
-        </div>
+          <Header 
+              admin={admin} 
+          />
           
+          {!loggedUser ?
            <Login 
-            token={token}
             handleUserName={handleUserName}
-            user={userName}
+            user={username}
             handlePassword={handlePassword}
             password={password}
-            submit={handleSubmit}
-            /> 
-         
-      </div>
+            submit={handleLogin}
+            /> : 
+            <div>
+              <p>{loggedUser.username} logged in</p>
+              <button onClick={handleLogout}>Log Out</button>
+            </div>
+          }
+          </div>
+      {errorMessage ?
+        <div style={{display: 'flex',alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink' }}>
+          <h1 style={{color: 'red' }}>{errorMessage}</h1>
+        </div> :
+        null
+      }
       <Routes>
         <Route path='/' element={<ProductList 
           input={searchInput}
           handleSearch={handleSearchChange}
           product={product}
-          deleteP={deleteProduct}/>} 
+          deleteP={deleteProduct}
+          user={loggedUser}/>} 
           />
 
         <Route path="/login" element={<RegisterPage 
@@ -157,6 +225,7 @@ function App() {
           handleName={handleRegisterName}
         />} />
         <Route path="/add" element={
+          admin ? (
           <AddProducts 
             addProduct={addProduct} 
             handleAddName={handleAddName} 
@@ -165,17 +234,14 @@ function App() {
             inputCategory={newCategory}
             handlePrice={handlePrice}
             inputPrice={newPrice}
-          />} />
+          />
+          ) : (
+            <Navigate to="/" />
+          )
+        } 
+        />
       </Routes>
-    </Router>
-     {/* <Header 
-          //input={changeOrder}
-          search={handleChange}
-          addInput={handleAdd}
-          addProduct={addProduct}
-          product={newProduct}
-          /> */}
-    
+    </Router>    
     </>
   );
 }

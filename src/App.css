@@ -5,28 +5,35 @@
 }
 
 .nav{
-  margin: 10px;
-  padding: 10px;
+  margin: 0px;
+  padding: 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
 }
 
-.links {
+/* .links {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 50%;
   height: 40px;
   align-items: center;
-}
+} */
 
 .link {
   font-size: 20px;
 }
+.hiddenLink {
+  display: none;
+}
 .loginInput {
-  height: 40px; 
+  height: 40px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* position: absolute;
+  right: 100px; */
 }
 .loginInput > input {
   border-radius: 6px;
@@ -48,7 +55,9 @@
 .searchBar > input{
   width: 60%;
   border-radius: 6px;
-
+}
+.register > label > input,button {
+  border-radius: 6px;
 }
 
 
