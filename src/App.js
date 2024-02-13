@@ -37,6 +37,7 @@ function App() {
   const [loggedUser, setLoggedUser] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const [admin, setAdmin] = useState(false)
+  const [color, setColor] = useState(localStorage.getItem('color') || 'white')
 
   useEffect(() => {  
     productService.getAll()
@@ -52,11 +53,18 @@ function App() {
 
   useEffect(() => {
     const loggedUserJSON = localStorage.getItem('loggedUser')
+    const storedCart = localStorage.getItem('cart');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      setLoggedUser(user)
-      console.log(user.username);
+      setLoggedUser(user)   
+      if (user.username === 'lauri') {
+        setAdmin(true)
+      }
     }
+    if (storedCart) {
+      setCartContent(JSON.parse(storedCart));
+    }
+    console.log(admin);
   }, [])
   const handleSelectChange = (e) => {
     e.preventDefault()
@@ -66,12 +74,18 @@ function App() {
     e.preventDefault()
     setSearchInput(e.target.value)
   }
-  const handleAddCart = (id) => {
-    const item = product.filter(p => p.id === id)
-    productService.getById(id).then(
-      setCartContent(cartContent.concat(item))
-    )
-    
+  const handleAddCart = async (id) => {
+    try {
+      const item = await productService.getById(id)    
+      setCartContent((prevCart) => {
+        const updatedCart = [...prevCart, item]
+        localStorage.setItem('cart', JSON.stringify(updatedCart))
+        return updatedCart
+      })     
+  }
+    catch (err) {
+      console.log(err)
+    }
   }
   const handlePrice = (e) => {
     e.preventDefault()
@@ -115,7 +129,6 @@ function App() {
       setProduct(product.concat(pr))
     })
     }
-    
     setNewProductName('')
     setNewCategory('none')
     setNewPrice(0)
@@ -156,7 +169,6 @@ function App() {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    
     try {
       const user = await loginService.login({
         username, password
@@ -169,8 +181,7 @@ function App() {
       setPassword('')
       if (user.username === 'lauri') {
         setAdmin(true)
-      }
-      
+      }   
     } catch (exeption) {
       setErrorMessage('wrong credentials')
       setUserName('')
@@ -185,17 +196,24 @@ function App() {
     setLoggedUser(null)
     setAdmin(false)
     localStorage.clear()
+    setCartContent([])
+  }
+  const handleBackgroundColor = (e) => {
+    e.preventDefault()
+    setColor(e.target.value)
+    localStorage.setItem('color', e.target.value)
   }
 
-
   return (
-    <>
+    <div style={{height: '100%',backgroundColor: color}}>
     <Router>
       <div className='nav'>
           <Header 
               admin={admin} 
-          />
-          
+              loggedUser={loggedUser}
+              bgColor={handleBackgroundColor}
+              color={color}
+          />     
           {!loggedUser ?
            <Login 
             handleUserName={handleUserName}
@@ -262,7 +280,7 @@ function App() {
         />
       </Routes>
     </Router>    
-    </>
+    </div>
   );
 }
 

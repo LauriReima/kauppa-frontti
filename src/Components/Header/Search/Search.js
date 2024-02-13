@@ -6,7 +6,6 @@ const Search = ({input, handleSearch, handleSelect}) => {
         <div className='searchBar'>
             <input onChange={handleSearch} placeholder='Search'/>
             <select 
-                //value={inputCategory} 
                 onChange={handleSelect}>
                 <option value=''>--select--</option>
                 <option value='armor'>Armor</option>

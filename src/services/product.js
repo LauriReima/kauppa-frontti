@@ -12,7 +12,7 @@ const getAll = async () => {
 const getById = async (id) => {
     const req = axios.get(`${products}${id}`)
     const res = await req
-    return res
+    return res.data
 }
 
 const create = async (product) => {
