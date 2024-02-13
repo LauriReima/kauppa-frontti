@@ -9,6 +9,11 @@ const getAll = async () => {
     const res = await req
     return res
 }
+const getById = async (id) => {
+    const req = axios.get(`${products}${id}`)
+    const res = await req
+    return res
+}
 
 const create = async (product) => {
     const req = axios.post(products, product)
@@ -19,4 +24,4 @@ const deleteProduct = (id) => {
     return axios.delete(`${products}${id}`)
 }
 // eslint-disable-next-line
-export default { getAll, create, deleteProduct }
+export default { getAll, getById, create, deleteProduct }

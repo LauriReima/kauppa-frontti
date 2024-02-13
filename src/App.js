@@ -14,6 +14,7 @@ import loginService from './services/login'
 import RegisterPage from './pages/RegisterPage';
 import AddProducts from './pages/AddProducts';
 import Login from './Components/Login/Login';
+import CartPage from './pages/Cart';
 import user from './services/user';
 import Header from './Components/Header/Header';
 
@@ -22,11 +23,12 @@ import Header from './Components/Header/Header';
 
 function App() {
   const [searchInput, setSearchInput] = useState('')
+  const [selectInput, setSelectInput] = useState('')
   const [product, setProduct] = useState([])
   const [newProductName, setNewProductName] = useState('')
   const [newCategory, setNewCategory] = useState('none')
   const [newPrice, setNewPrice] = useState(0)
-  const [token, setToken] = useState()
+  const [cartContent, setCartContent] = useState([])
   const [users, setUsers] = useState([])
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
@@ -56,10 +58,20 @@ function App() {
       console.log(user.username);
     }
   }, [])
-
+  const handleSelectChange = (e) => {
+    e.preventDefault()
+    setSelectInput(e.target.value)
+  }
   const handleSearchChange = (e) => {
     e.preventDefault()
     setSearchInput(e.target.value)
+  }
+  const handleAddCart = (id) => {
+    const item = product.filter(p => p.id === id)
+    productService.getById(id).then(
+      setCartContent(cartContent.concat(item))
+    )
+    
   }
   const handlePrice = (e) => {
     e.preventDefault()
@@ -96,7 +108,7 @@ function App() {
       price: newPrice,
       category: newCategory    
     }
-    if (!productObject.name | productObject.price < 1 | productObject.category === 'none'){
+    if (!productObject.name | productObject.price < 0.1 | productObject.category === 'none'){
       window.alert('Tarkista lisäys!!')
     } else{
       productService.create(productObject).then(pr => {
@@ -175,10 +187,6 @@ function App() {
     localStorage.clear()
   }
 
-  // const changeOrder = (e) => {
-  //   //console.log(e.target.value);
-  //   setOrder(e.target.value)
-  // }
 
   return (
     <>
@@ -210,13 +218,25 @@ function App() {
       }
       <Routes>
         <Route path='/' element={<ProductList 
-          input={searchInput}
+          searchInput={searchInput}
+          selectInput={selectInput}
           handleSearch={handleSearchChange}
+          handleSelect={handleSelectChange}
           product={product}
           deleteP={deleteProduct}
-          user={loggedUser}/>} 
+          user={loggedUser}
+          addToCart={handleAddCart}
+          />} 
           />
-
+        <Route path="/cart" element={<CartPage 
+          registerUser={registerUser}
+          userName={registerName}
+          password={registerPassword}
+          handlePW={handleRegisterPassword}
+          handleName={handleRegisterName}
+          cartContent={cartContent}
+          user={loggedUser}
+        />} />
         <Route path="/login" element={<RegisterPage 
           registerUser={registerUser}
           userName={registerName}

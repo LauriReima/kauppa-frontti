@@ -1,7 +1,7 @@
 import React from 'react';
 import './card.css'
 
-function Card({name, price, category, image, id, deleteP, user}) {
+function Card({name, price, category, image, id, deleteP, user, addToCart}) {
 
     //const important = (!importance) ? "eipä kovinkaan" : "tärkeää"
     const styles = {
@@ -19,7 +19,7 @@ function Card({name, price, category, image, id, deleteP, user}) {
     
         return (
             <>
-                <div className='cardDiv' style={styles.card}>
+                <div className='cardDiv' style={styles.card} >
                     
                     <h1 style={styles.content}>{name}</h1>
                     <h3>{price} €</h3>
@@ -27,6 +27,7 @@ function Card({name, price, category, image, id, deleteP, user}) {
                     <img className='flag' src={image} alt='kuva' style={styles.flag}/>
                     <br></br>
                     {user !== null && user.username === 'lauri' ? <button onClick={() => deleteP(id)}>delete</button> : ''}
+                    <button onClick={() => addToCart(id)}>Add</button>
                 </div>
             </>
         )

@@ -18,6 +18,7 @@ function Header({admin}) {
                 <Link className='link' to='/login'>Register</Link> :
                 <Link className='link' to='/add'>Add</Link>   
                 }
+                <Link className='link' to='/cart'>Cart</Link> 
             </div>
             <div className='dropdown'>
                 <div className={`dropdown-content ${dropBox ? 'show' : ''}`}>
@@ -26,6 +27,7 @@ function Header({admin}) {
                     <Link className='link' to='/login'>Register</Link> :
                     <Link className='link' to='/add'>Add</Link>   
                     }
+                    <Link className='link' to='/cart'>Cart</Link> 
                 </div>
             </div>
         </div>

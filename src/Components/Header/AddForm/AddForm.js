@@ -21,7 +21,7 @@ const AddForm = ({handleAddName, inputName, addProduct, handleCategory, inputCat
                 </label>
                 <label>
                     <p>Hinta:</p>
-                    <input type='number' value={inputPrice} onChange={handlePrice} min='1'/>
+                    <input type='number' value={inputPrice} onChange={handlePrice} min='0,1'/>
                 </label>
                 <button type='submit'>lisää</button>
             </form>

@@ -4,27 +4,30 @@ import Search from '../Header/Search/Search'
 import './productList.css'
 
 
-const ProductList = ({input,  product, deleteP, handleSearch, user}) => {
+const ProductList = ({searchInput, selectInput,  product, deleteP, handleSearch, user, handleSelect, addToCart}) => {
+    // filter by name
     const filtered = product.filter(p => {
-        return p.name.toLowerCase().match(input)
+        let name = p.name.toLowerCase().match(searchInput)
+        return name
     })
-    const sorted = filtered.map((s) => 
-        s.name.toLowerCase()
-    )
-    
-    
-    
+    // filter the names by category
+    const categorize = filtered.filter(c => {
+        let category = c.category.match(selectInput)
+        return category
+    })
+       
     if (product.length > 0){
         return (
         <>
         <Search 
-            input={input}
+            // input={input}
             handleSearch={handleSearch}
+            handleSelect={handleSelect}
             />
         <div className='grid'>
             {
             //sorter(order)
-            filtered.map((p) => (
+            categorize.map((p) => (
             <Card 
                 key={p.id}
                 id={p.id}
@@ -34,6 +37,7 @@ const ProductList = ({input,  product, deleteP, handleSearch, user}) => {
                 image={p.image}
                 deleteP={deleteP}
                 user={user}
+                addToCart={addToCart}
                 //flag={p.flags.png} 
             />
             ))}
