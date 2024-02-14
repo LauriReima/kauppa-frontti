@@ -1,9 +1,9 @@
-import useState from 'react';
+import useState, { useEffect } from 'react';
+import userService from '../services/user'
 
 import '../Components/Card/card.css'
 
-const CartPage = ({registerUser, userName, password, handlePW, user, cartContent}) => {
-
+const CartPage = ({ users, user, cartContent}) => {
     const styles = {
         page: {
             height: '10000%',
@@ -36,6 +36,17 @@ const CartPage = ({registerUser, userName, password, handlePW, user, cartContent
         }
     }
     
+    const addCartDb = async () => {
+        const loggedUser = users.find((u) => u.username === user.username)
+        const userId = loggedUser.id 
+        try{
+            await userService.addToCart(userId, cartContent[0].id)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+ 
+    
         return (
             <div style={styles.page}>
                 {cartContent.length > 0 ? 
@@ -61,7 +72,7 @@ const CartPage = ({registerUser, userName, password, handlePW, user, cartContent
                 }
                 <div style={styles.sidebar}>
                     <h1>hello</h1>
-                    <button>Submit</button>
+                    <button onClick={addCartDb}>Submit</button>
                     {/* <ul style={styles.list}>
                         <li key={'1'}><span>hello</span></li>
                         <li key={'2'}><span>hello</span></li>

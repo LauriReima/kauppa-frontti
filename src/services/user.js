@@ -12,6 +12,14 @@ const create = async (user) => {
     const res = await req
     return res.data
 }
+const addToCart = async (userId, productId) => {
+    const req =  axios.put(`${url}${userId}`, {
+        $push: {cart: {product: productId.id}}
+    })
+    const res = await req
+    console.log(res.data);
+    return res.data;
+}
 
 // eslint-disable-next-line
-export default {  create, getAll }
+export default {  create, getAll, addToCart }

@@ -17,6 +17,7 @@ import Login from './Components/Login/Login';
 import CartPage from './pages/Cart';
 import user from './services/user';
 import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer'
 
 
 
@@ -43,7 +44,6 @@ function App() {
     productService.getAll()
     .then(res => {
         setProduct(res.data)
-        //console.log(res.data);
     })
     userService.getAll()
     .then(res => {
@@ -64,7 +64,6 @@ function App() {
     if (storedCart) {
       setCartContent(JSON.parse(storedCart));
     }
-    console.log(admin);
   }, [])
   const handleSelectChange = (e) => {
     e.preventDefault()
@@ -161,8 +160,6 @@ function App() {
         setUsers(users.concat(u))
         setRegisterName('')
         setRegisterPassword('')
-
-        //navigate('/')
       })
     }
   }
@@ -247,11 +244,7 @@ function App() {
           />} 
           />
         <Route path="/cart" element={<CartPage 
-          registerUser={registerUser}
-          userName={registerName}
-          password={registerPassword}
-          handlePW={handleRegisterPassword}
-          handleName={handleRegisterName}
+          users={users}
           cartContent={cartContent}
           user={loggedUser}
         />} />
@@ -280,6 +273,7 @@ function App() {
         />
       </Routes>
     </Router>    
+    <Footer />
     </div>
   );
 }
