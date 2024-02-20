@@ -1,15 +1,16 @@
 import userService from '../services/user'
 
 import '../Components/Card/card.css'
+import { useEffect, useState } from 'react'
 
-const CartPage = ({ users, user, cartContent, allProducts}) => {
-
+const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
+    //const [cContent, setCContent] = useState(JSON.parse(localStorage.getItem('cart')) || [])
     const loggedUser = users.find((u) => u.username === user.username)
     const userId = loggedUser.id
-    let history = allProducts.filter(p => loggedUser.cart.includes(p.id));        
+    let history = loggedUser.cart;        
 
-    console.log(allProducts, 'all');
-    console.log(loggedUser, 'logged')
+    console.log(history, 'hist');
+
 
     const styles = {
         page: {
@@ -43,18 +44,6 @@ const CartPage = ({ users, user, cartContent, allProducts}) => {
         }
     }
     
-    const addCartDb = async (userId) => {    
-        try{
-            let array = []
-            cartContent.map(p => (
-                array.push(p.id)
-            ))
-            await userService.addToCart(userId, array)
-        } catch (err) {
-            console.log(err);
-        }
-    }
- 
         return (
             <div style={styles.page}>
                 {cartContent.length > 0 ? 
@@ -75,17 +64,17 @@ const CartPage = ({ users, user, cartContent, allProducts}) => {
                 </div> : 
                 <div>
                     <h2>Cart empty</h2>
-                    <h3>please add something and rememember to register if you aren't yet!!</h3>
+                    <h3>please add something to the cart!!</h3>
                 </div> 
                 }
                 <div style={styles.sidebar}>
+                    <button onClick={() => addCartDb(userId,cartContent)}>Submit</button>
                     <h3>Previously purchased</h3>
-                    <button onClick={() => addCartDb(userId)}>Submit</button>
-                    <ul style={styles.list}>
                         {history !== undefined ? history.map((p) => (
-                            <li key={p.id}>{p.name}</li>
+                            <ul style={styles.list} key={p.id}>
+                                <li >{p.name}</li>
+                            </ul> 
                         )): ''}
-                    </ul> 
                 </div>
             </div>
         )}

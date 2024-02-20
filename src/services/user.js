@@ -20,7 +20,7 @@ const create = async (user) => {
 const addToCart = async (userId, product) => {
     const req =  axios.put(`${url}${userId}`, {product})
     const res = await req
-    console.log(res.data);
+    console.log(res.data, 'nappi');
     return res.data;
 }
 

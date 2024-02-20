@@ -86,6 +86,21 @@ function App() {
       console.log(err)
     }
   }
+  const addCartDb = async (userId,cContent) => {    
+    try{
+        let array = []
+        cContent.map((p) => (
+            array.push(p)
+        ))
+        console.log(array,'array');
+        await userService.addToCart(userId, array)
+        localStorage.removeItem('cart')
+        setCartContent([])
+        window.location.reload()
+    } catch (err) {
+        console.log(err);
+    }
+}
   const handlePrice = (e) => {
     e.preventDefault()
     setNewPrice(e.target.value)
@@ -248,9 +263,10 @@ function App() {
         loggedUser ? (
         <CartPage 
           users={users}
-          cartContent={cartContent}
           user={loggedUser}
           allProducts={product}
+          cartContent={cartContent}
+          addCartDb={addCartDb}
         />
         ): (
           <Navigate to="/" />
