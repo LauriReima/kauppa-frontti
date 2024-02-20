@@ -25,6 +25,7 @@ function Card({name, price, category, image, id, deleteP, user, addToCart}) {
                     <h3>{price} €</h3>
                     <p>{category}</p>
                     <img className='flag' src={image} alt='kuva' style={styles.flag}/>
+                    <p>quantity</p>
                     <br></br>
                     {user !== null && user.username === 'lauri' ? <button onClick={() => deleteP(id)}>delete</button> : ''}
                     {user ? <button onClick={() => addToCart(id)}>Add</button> : ''}
