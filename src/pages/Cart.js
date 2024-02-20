@@ -1,9 +1,16 @@
-import useState, { useEffect } from 'react';
 import userService from '../services/user'
 
 import '../Components/Card/card.css'
 
-const CartPage = ({ users, user, cartContent}) => {
+const CartPage = ({ users, user, cartContent, allProducts}) => {
+
+    const loggedUser = users.find((u) => u.username === user.username)
+    const userId = loggedUser.id
+    let history = allProducts.filter(p => loggedUser.cart.includes(p.id));        
+
+    console.log(allProducts, 'all');
+    console.log(loggedUser, 'logged')
+
     const styles = {
         page: {
             height: '10000%',
@@ -36,17 +43,18 @@ const CartPage = ({ users, user, cartContent}) => {
         }
     }
     
-    const addCartDb = async () => {
-        const loggedUser = users.find((u) => u.username === user.username)
-        const userId = loggedUser.id 
+    const addCartDb = async (userId) => {    
         try{
-            await userService.addToCart(userId, cartContent[0].id)
+            let array = []
+            cartContent.map(p => (
+                array.push(p.id)
+            ))
+            await userService.addToCart(userId, array)
         } catch (err) {
             console.log(err);
         }
     }
  
-    
         return (
             <div style={styles.page}>
                 {cartContent.length > 0 ? 
@@ -71,13 +79,13 @@ const CartPage = ({ users, user, cartContent}) => {
                 </div> 
                 }
                 <div style={styles.sidebar}>
-                    <h1>hello</h1>
-                    <button onClick={addCartDb}>Submit</button>
-                    {/* <ul style={styles.list}>
-                        <li key={'1'}><span>hello</span></li>
-                        <li key={'2'}><span>hello</span></li>
-                        <li key={'3'}><span>hello</span></li>
-                    </ul> */}
+                    <h3>Previously purchased</h3>
+                    <button onClick={() => addCartDb(userId)}>Submit</button>
+                    <ul style={styles.list}>
+                        {history !== undefined ? history.map((p) => (
+                            <li key={p.id}>{p.name}</li>
+                        )): ''}
+                    </ul> 
                 </div>
             </div>
         )}

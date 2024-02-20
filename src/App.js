@@ -199,6 +199,7 @@ function App() {
     e.preventDefault()
     setColor(e.target.value)
     localStorage.setItem('color', e.target.value)
+    console.log(JSON.parse(localStorage.getItem('cart')));
   }
 
   return (
@@ -243,11 +244,19 @@ function App() {
           addToCart={handleAddCart}
           />} 
           />
-        <Route path="/cart" element={<CartPage 
+        <Route path="/cart" element={
+        loggedUser ? (
+        <CartPage 
           users={users}
           cartContent={cartContent}
           user={loggedUser}
-        />} />
+          allProducts={product}
+        />
+        ): (
+          <Navigate to="/" />
+        )
+        } 
+        />
         <Route path="/login" element={<RegisterPage 
           registerUser={registerUser}
           userName={registerName}
