@@ -12,8 +12,8 @@ const AddForm = ({handleAddName, inputName, addProduct, handleCategory, inputCat
                     <input value={inputName} onChange={handleAddName}/>  
                 </label>
                 <label>
-                    <select value={inputCategory} onChange={handleCategory}>
-                        <option  value='none'>--pick one--</option>
+                    <select className='button-35' style={{maxWidth: '150px'}} value={inputCategory} onChange={handleCategory}>
+                        <option  value='none'>Category</option>
                         <option value='armor'>Armor</option>
                         <option value='melee'>Melee</option>
                         <option value='range'>Range</option>
@@ -23,7 +23,7 @@ const AddForm = ({handleAddName, inputName, addProduct, handleCategory, inputCat
                     <p>Hinta:</p>
                     <input type='number' value={inputPrice} onChange={handlePrice} min='0,1'/>
                 </label>
-                <button type='submit'>lisää</button>
+                <button className='button-35' type='submit'>lisää</button>
             </form>
         </div>
     );

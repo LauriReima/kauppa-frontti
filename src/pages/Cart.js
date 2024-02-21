@@ -1,7 +1,4 @@
-import userService from '../services/user'
-
 import '../Components/Card/card.css'
-import { useEffect, useState } from 'react'
 
 const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
     //const [cContent, setCContent] = useState(JSON.parse(localStorage.getItem('cart')) || [])
@@ -54,11 +51,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
                         <h1 style={styles.content}>{p.name}</h1>
                         <h3>{p.price} €</h3>
                         <p>{p.category}</p>
-                    
-                        {/* <img className='flag' src={image} alt='kuva' style={styles.flag}/> */}
-                        <br></br>
-                        {/* <button onClick={() => deleteP(id)}>delete from cart</button>  */}
-                        {/* <button onClick={() => addToCart(id)}>Add</button> */}
+
                     </div> 
                 ))}
                 </div> : 
@@ -68,7 +61,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
                 </div> 
                 }
                 <div style={styles.sidebar}>
-                    <button onClick={() => addCartDb(userId,cartContent)}>Submit</button>
+                    <button className='button-35' onClick={() => addCartDb(userId,cartContent)}>Submit</button>
                     <h3>Previously purchased</h3>
                         {history !== undefined ? history.map((p) => (
                             <ul style={styles.list} key={p.id}>

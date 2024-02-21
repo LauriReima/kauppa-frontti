@@ -8,7 +8,7 @@ function Card({name, price, category, image, id, deleteP, user, addToCart}) {
         card: {
             width: 'auto',
             height: '300px',
-            background: 'beige',
+            background: 'rgb(105, 151, 146)',
             borderRadius: '10px'
         },
         flag: {
@@ -27,8 +27,8 @@ function Card({name, price, category, image, id, deleteP, user, addToCart}) {
                     <img className='flag' src={image} alt='kuva' style={styles.flag}/>
                     <p>quantity</p>
                     <br></br>
-                    {user !== null && user.username === 'lauri' ? <button onClick={() => deleteP(id)}>delete</button> : ''}
-                    {user ? <button onClick={() => addToCart(id)}>Add</button> : ''}
+                    {user !== null && user.username === 'lauri' ? <button className='button-35' onClick={() => deleteP(id)}>delete</button> : ''}
+                    {user ? <button className='button-35' onClick={() => addToCart(id)}>Add</button> : ''}
                 </div>
             </>
         )

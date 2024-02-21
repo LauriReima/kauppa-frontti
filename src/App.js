@@ -1,4 +1,3 @@
-import './App.css';
 import { useEffect, useState } from 'react';
 import {
   Routes,
@@ -15,9 +14,10 @@ import RegisterPage from './pages/RegisterPage';
 import AddProducts from './pages/AddProducts';
 import Login from './Components/Login/Login';
 import CartPage from './pages/Cart';
-import user from './services/user';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer'
+
+import './App.css';
 
 
 
@@ -237,7 +237,7 @@ function App() {
             /> : 
             <div>
               <p>{loggedUser.username} logged in</p>
-              <button onClick={handleLogout}>Log Out</button>
+              <button className='button-35' onClick={handleLogout}>Log Out</button>
             </div>
           }
           </div>

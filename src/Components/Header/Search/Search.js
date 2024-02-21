@@ -4,10 +4,10 @@ const Search = ({input, handleSearch, handleSelect}) => {
     
     return (
         <div className='searchBar'>
-            <input onChange={handleSearch} placeholder='Search'/>
-            <select 
+            <input className='inputField' onChange={handleSearch} placeholder='Search'/>
+            <select className='button-35' style={{maxWidth: '150px'}}
                 onChange={handleSelect}>
-                <option value=''>--select--</option>
+                <option value=''>Category</option>
                 <option value='armor'>Armor</option>
                 <option value='melee'>Melee</option>
                 <option value='range'>Range</option>

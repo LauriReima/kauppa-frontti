@@ -6,9 +6,9 @@ const Login = ({logged, handleUserName, handlePassword, password, user, submit})
         <>
             <form className='loginInput' onSubmit={submit}>
               
-              <input type="text" name="username" placeholder='Enter your username' onChange={handleUserName} value={user}/>
-              <input type="password" name="password" placeholder='Enter your password' onChange={handlePassword} value={password}/> 
-              <button type='submit' >Login</button>
+              <input className='inputField' type="text" name="username" placeholder='Enter your username' onChange={handleUserName} value={user}/>
+              <input className='inputField' type="password" name="password" placeholder='Enter your password' onChange={handlePassword} value={password}/> 
+              <button className='button-35' type='submit' >Login</button>
             </form>
             
 

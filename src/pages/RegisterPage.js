@@ -14,7 +14,7 @@ const RegisterPage = ({registerUser, userName, password, handlePW, handleName}) 
                         <p>Password:</p>
                         <input type="password" value={password} name="password" placeholder='Enter your password' onChange={handlePW}/>  
                     </label> 
-                    <button onClick={registerUser}>Register</button>        
+                    <button className='button-35' onClick={registerUser}>Register</button>        
                 </form>
             </div>
         </>

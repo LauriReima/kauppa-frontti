@@ -13,11 +13,23 @@ function Header({admin, bgColor, color}) {
         <div className='header'>
             <button className='dropbtn' onClick={toggleDrop}>Menu</button>
             <div className='header-links'>
-                <Link className='link' to='/'>Home</Link>
-                {!user && <Link className='link' to='/login'>Register</Link>}
-                {user === 'lauri' && <Link className='link' to='/add'>Add</Link>}
-                <Link className='link' to='/cart'>Cart</Link> 
-                <select value={color} onChange={bgColor}>
+                <Link to='/'>
+                    <button className='button-35'>Home</button>
+                </Link>
+                {!user && 
+                <Link to='/login'>
+                    <button className='button-35'>Register</button>
+                </Link>
+                }{
+                user === 'lauri' && 
+                <Link to='/add'>
+                    <button className='button-35'>Add</button>
+                </Link>
+                }
+                <Link to='/cart'>
+                    <button className='button-35'>Cart</button> 
+                </Link>
+                <select className='button-35' style={{maxWidth: '150px'}} value={color} onChange={bgColor}>
                     <option value='white'>White</option>
                     <option value='grey'>Grey</option>
                     <option value='orange'>Orange</option>
@@ -29,7 +41,7 @@ function Header({admin, bgColor, color}) {
                     {!user && <Link className='link' to='/login'>Register</Link>}
                     {user === 'lauri' && <Link className='link' to='/add'>Add</Link>}
                     <Link className='link' to='/cart'>Cart</Link> 
-                    <select value={color} onChange={bgColor}>
+                    <select style={{backgroundColor: 'rgb(105, 151, 146)', fontSize: '15px'}} value={color} onChange={bgColor}>
                         <option value='white'>White</option>
                         <option value='grey'>Grey</option>
                         <option value='orange'>Orange</option>
