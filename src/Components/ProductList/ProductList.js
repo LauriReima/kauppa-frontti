@@ -4,7 +4,7 @@ import Search from '../Header/Search/Search'
 import './productList.css'
 
 
-const ProductList = ({searchInput, selectInput,  product, deleteP, handleSearch, user, handleSelect, addToCart}) => {
+const ProductList = ({searchInput, selectInput,  product, deleteP, handleSearch, user, handleSelect, addToCart, inputColor}) => {
     // filter by name
     const filtered = product.filter(p => {
         let name = p.name.toLowerCase().match(searchInput)
@@ -23,6 +23,7 @@ const ProductList = ({searchInput, selectInput,  product, deleteP, handleSearch,
             // input={input}
             handleSearch={handleSearch}
             handleSelect={handleSelect}
+            inputColor={inputColor}
             />
         <div className='grid'>
             {

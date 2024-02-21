@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Search = ({input, handleSearch, handleSelect}) => {
+const Search = ({inputColor, handleSearch, handleSelect}) => {
     
     return (
         <div className='searchBar'>
-            <input className='inputField' onChange={handleSearch} placeholder='Search'/>
+            <input style={{backgroundColor: inputColor}} className='inputField' onChange={handleSearch} placeholder='Search'/>
             <select className='button-35' style={{maxWidth: '150px'}}
                 onChange={handleSelect}>
                 <option value=''>Category</option>

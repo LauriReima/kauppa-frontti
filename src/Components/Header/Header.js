@@ -22,16 +22,16 @@ function Header({admin, bgColor, color}) {
                 </Link>
                 }{
                 user === 'lauri' && 
-                <Link to='/add'>
+                <Link  to='/add'>
                     <button className='button-35'>Add</button>
                 </Link>
                 }
-                <Link to='/cart'>
+                <Link  to='/cart'>
                     <button className='button-35'>Cart</button> 
                 </Link>
                 <select className='button-35' style={{maxWidth: '150px'}} value={color} onChange={bgColor}>
-                    <option value='white'>White</option>
-                    <option value='grey'>Grey</option>
+                    <option value='#c1dedb'>light</option>
+                    <option value='#374543'>dark</option>
                     <option value='orange'>Orange</option>
                 </select>
             </div>

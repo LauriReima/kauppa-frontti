@@ -10,7 +10,7 @@
 .header-links {
     display: flex;
     justify-content: space-evenly;
-    width: 50%;
+    width: auto;
     height: 40px;
     
   }

@@ -13,13 +13,19 @@
   align-items: center;
   justify-content: space-around;
 }
+.loggedName{
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+}
 
 .loginInput {
   height: 40px;
   display: flex;
   flex-direction: column;
+  justify-content: stretch;
   align-items: center;
-
 }
 .inputField {
   border-radius: 6px;
@@ -28,6 +34,8 @@
   outline: none;
   padding: 0.6rem 1.0rem;
   text-align: center;
+  font-size: 1.0rem;
+  font-weight: 600;
 }
 
 .searchBar{
@@ -63,6 +71,15 @@
 .button-35:hover {
   box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
   background-color: rgb(171, 161, 161);
+}
+.button-35:active {
+  background-color: aqua;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button-35:focus {
+  /* Lisää tyyliä focus-tilaan, esimerkiksi reunus tai taustaväri */
+  outline: 2px solid #007bff;
 }
 
 

@@ -6,7 +6,10 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
     const userId = loggedUser.id
     let history = loggedUser.cart;        
 
-    console.log(history, 'hist');
+    const emptyCart = () => {
+        localStorage.removeItem('cart')
+        window.location.reload()
+    }
 
 
     const styles = {
@@ -29,9 +32,9 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
             opacity: '0.4',
         },
         sidebar: {
-            width: '30%',
+            width: 'auto%',
             height: 'auto',
-            padding: '20px',
+            padding: '0px',
             borderRadius: '10px',
             textAlign: 'center'
         },
@@ -40,18 +43,16 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
             padding: 0,
         }
     }
-    
+    const total = cartContent.reduce((sum, prod)=> sum + prod.price,0)
         return (
             <div style={styles.page}>
                 {cartContent.length > 0 ? 
                 <div className='grid'> 
                 {cartContent.map((p) => (
-                    <div className='cardDiv' style={styles.card} key={p.id}>
-                        
+                    <div className='cardDiv' style={styles.card} key={p.id}>             
                         <h1 style={styles.content}>{p.name}</h1>
                         <h3>{p.price} €</h3>
                         <p>{p.category}</p>
-
                     </div> 
                 ))}
                 </div> : 
@@ -61,11 +62,17 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
                 </div> 
                 }
                 <div style={styles.sidebar}>
-                    <button className='button-35' onClick={() => addCartDb(userId,cartContent)}>Submit</button>
+                    <button 
+                        className='button-35' 
+                        onClick={() => addCartDb(userId,cartContent)}>
+                        Submit
+                    </button>
+                    <button className='button-35' onClick={() => emptyCart()}>Empty the cart</button>
+                    <p>Total: {total} €</p>
                     <h3>Previously purchased</h3>
                         {history !== undefined ? history.map((p) => (
                             <ul style={styles.list} key={p.id}>
-                                <li >{p.name}</li>
+                                <li >{p.name}</li> 
                             </ul> 
                         )): ''}
                 </div>

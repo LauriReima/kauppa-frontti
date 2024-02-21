@@ -38,7 +38,8 @@ function App() {
   const [loggedUser, setLoggedUser] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const [admin, setAdmin] = useState(false)
-  const [color, setColor] = useState(localStorage.getItem('color') || 'white')
+  const [color, setColor] = useState(localStorage.getItem('color') || '#c1dedb')
+  const [inputColor, setInputColor] = useState('#c1d9d5')
 
   useEffect(() => {  
     productService.getAll()
@@ -214,7 +215,21 @@ function App() {
     e.preventDefault()
     setColor(e.target.value)
     localStorage.setItem('color', e.target.value)
-    console.log(JSON.parse(localStorage.getItem('cart')));
+    console.log(e.target.value);
+    switch (e.target.value) {
+      case '#c1dedb':
+        setInputColor('#c1d9d5')
+        break;
+      case '#374543':
+        setInputColor('#a2aba9')
+        break;
+      case 'orange':
+        setInputColor('yellow')
+        break;
+      default:
+        console.log('Unknown fruit.');
+    }
+    
   }
 
   return (
@@ -234,9 +249,10 @@ function App() {
             handlePassword={handlePassword}
             password={password}
             submit={handleLogin}
+            inputColor={inputColor}
             /> : 
-            <div>
-              <p>{loggedUser.username} logged in</p>
+            <div className='loggedName'>
+              <p style={{fontSize: '28px', fontWeight: '500'}}>{loggedUser.username} logged in</p>
               <button className='button-35' onClick={handleLogout}>Log Out</button>
             </div>
           }
@@ -257,6 +273,7 @@ function App() {
           deleteP={deleteProduct}
           user={loggedUser}
           addToCart={handleAddCart}
+          inputColor={inputColor}
           />} 
           />
         <Route path="/cart" element={
@@ -279,6 +296,7 @@ function App() {
           password={registerPassword}
           handlePW={handleRegisterPassword}
           handleName={handleRegisterName}
+          inputColor={inputColor}
         />} />
         <Route path="/add" element={
           admin ? (
@@ -290,6 +308,7 @@ function App() {
             inputCategory={newCategory}
             handlePrice={handlePrice}
             inputPrice={newPrice}
+            inputColor={inputColor}
           />
           ) : (
             <Navigate to="/" />
