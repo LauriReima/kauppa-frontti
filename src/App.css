@@ -5,13 +5,15 @@
 }
 
 .nav{
-  height: 210px;
+  min-height: 230px;
+  max-height: 30vh;
   margin: 0px;
   padding: 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  
 }
 .loggedName{
   display: flex;
@@ -24,7 +26,7 @@
   height: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
+  /* justify-content: stretch; */
   align-items: center;
 }
 .inputField {

@@ -1,11 +1,17 @@
-import '../Components/Card/card.css'
+//import '../Components/Card/card.css'
 
 const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
     //const [cContent, setCContent] = useState(JSON.parse(localStorage.getItem('cart')) || [])
     const loggedUser = users.find((u) => u.username === user.username)
     const userId = loggedUser.id
-    let history = loggedUser.cart;        
-
+    let last10 = () => {
+        let arr = []
+        if (loggedUser.cart !== undefined) {
+            arr = loggedUser.cart.slice(-6).reverse();
+        }
+        return arr
+    }   
+    const badgeColor = 'rgb(105, 151, 146)'
     const emptyCart = () => {
         localStorage.removeItem('cart')
         window.location.reload()
@@ -14,7 +20,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
 
     const styles = {
         page: {
-            height: '10000%',
+            minHeight: '73vh',
             padding: '20px',
             display: 'grid',
             gridTemplateColumns: '70% 30%',
@@ -22,25 +28,31 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
             border: '10px'
         },
         card: {
-            width: 'auto',
-            height: '300px',
-            background: 'beige',
-            borderRadius: '10px'
+            textAlign: 'center',
+            width: '200px',
+            height: '220px',
+            background: badgeColor,
+            borderRadius: '10px',
+            border: 'solid grey'
         },
         flag: {
             position: 'center',
             opacity: '0.4',
         },
         sidebar: {
-            width: 'auto%',
-            height: 'auto',
-            padding: '0px',
+            width: '280px',
+            height: '500px',
+            padding: '10px',
             borderRadius: '10px',
-            textAlign: 'center'
+            textAlign: 'center',
+            background: badgeColor,
+            border: 'solid grey'
         },
         list: {
             listStyleType: 'none',
             padding: 0,
+            border: 'solid teal',
+            borderRadius: '13px'
         }
     }
     const total = cartContent.reduce((sum, prod)=> sum + prod.price,0)
@@ -67,14 +79,15 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
                         onClick={() => addCartDb(userId,cartContent)}>
                         Submit
                     </button>
-                    <button className='button-35' onClick={() => emptyCart()}>Empty the cart</button>
-                    <p>Total: {total} €</p>
+                    <button className='button-35' onClick={() => emptyCart()}><i class="fa-solid fa-trash"></i></button>
+                    <p style={{fontSize: '20px', background:'pink', borderRadius: '20px'}}>Total: {total} €</p>
                     <h3>Previously purchased</h3>
-                        {history !== undefined ? history.map((p) => (
+                        {last10().map((p) => (
                             <ul style={styles.list} key={p.id}>
-                                <li >{p.name}</li> 
+                                <li style={{fontSize: '17px', fontWeight: 'bold'}}>{p.name}: {p.price} €</li> 
+                                <li>{p.date}</li>
                             </ul> 
-                        )): ''}
+                        ))}
                 </div>
             </div>
         )}

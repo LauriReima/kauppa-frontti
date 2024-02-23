@@ -1,0 +1,17 @@
+.footer {
+    background-color: rgba(183, 160, 160, 0.577);
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.socialLinks{
+    font-size: 30px;
+    text-decoration: none;
+    color: black;
+    transition: font-size 0.3s;
+}
+.socialLinks:hover {
+    font-size: 45px;
+}

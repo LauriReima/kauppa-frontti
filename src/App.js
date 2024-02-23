@@ -102,6 +102,7 @@ function App() {
         console.log(err);
     }
 }
+
   const handlePrice = (e) => {
     e.preventDefault()
     setNewPrice(e.target.value)
@@ -253,10 +254,10 @@ function App() {
             /> : 
             <div className='loggedName'>
               <p style={{fontSize: '28px', fontWeight: '500'}}>{loggedUser.username} logged in</p>
-              <button className='button-35' onClick={handleLogout}>Log Out</button>
+              <button className='button-35' onClick={handleLogout}><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
           }
-          </div>
+      </div>
       {errorMessage ?
         <div style={{display: 'flex',alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink' }}>
           <h1 style={{color: 'red' }}>{errorMessage}</h1>
