@@ -1,7 +1,21 @@
 //import '../Components/Card/card.css'
 
+import { useEffect, useState } from "react"
+
 const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
-    //const [cContent, setCContent] = useState(JSON.parse(localStorage.getItem('cart')) || [])
+    const [sideVisible, setSideVisible] = useState(false)
+    const [disp, setDisp] = useState({
+        display: 'none',
+        width: '300px',
+        height: '500px',
+        padding: '10px',
+        borderRadius: '10px',
+        textAlign: 'center',
+        background: 'rgb(105, 151, 146)',
+        border: 'solid grey',
+        position: 'fixed',
+        transition: 'width 3s ease'
+    })
     const loggedUser = users.find((u) => u.username === user.username)
     const userId = loggedUser.id
     let last10 = () => {
@@ -11,12 +25,45 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
         }
         return arr
     }   
-    const badgeColor = 'rgb(105, 151, 146)'
+
     const emptyCart = () => {
         localStorage.removeItem('cart')
         window.location.reload()
     }
-    
+    const openSide = () => {
+        setSideVisible(!sideVisible)
+        setDisp((prevStyles) => ({
+            ...prevStyles,
+            display: sideVisible ? 'none' : 'block',
+            width: sideVisible ? '0' : '300px', 
+            right: '10px',
+            top: '70px',
+            border: 'solid 1px black'
+        }))
+    }
+    useEffect(() => {
+        const updateSidebarVisibility = () => {
+          if (window.innerWidth >= 768) {
+            setSideVisible(false)
+            setDisp({
+                ...disp,
+                display: 'block',
+                position: 'relative',
+            }); 
+          } else {
+            setSideVisible(false)
+            setDisp({
+                ...disp,
+                display: 'none',
+                position: 'fixed'}); 
+          }
+        };
+        updateSidebarVisibility();
+        window.addEventListener('resize', updateSidebarVisibility);
+        return () => {
+          window.removeEventListener('resize', updateSidebarVisibility);
+        };
+      }, []);
 
     const styles = {
         page: {
@@ -31,7 +78,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
             textAlign: 'center',
             maxWidth: '200px',
             height: '220px',
-            background: badgeColor,
+            background: 'rgb(105, 151, 146)',
             borderRadius: '10px',
             border: 'solid grey'
         },
@@ -39,15 +86,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
             position: 'center',
             opacity: '0.4',
         },
-        sidebar: {
-            width: 'auto',
-            height: '500px',
-            padding: '10px',
-            borderRadius: '10px',
-            textAlign: 'center',
-            background: badgeColor,
-            border: 'solid grey'
-        },
+        sidebar: disp,
         list: {
             listStyleType: 'none',
             padding: 0,
@@ -58,7 +97,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
     const total = cartContent.reduce((sum, prod)=> sum + prod.price,0)
         return (
             <>
-            <button className="button-35 hiddenButton"><i class="fa-solid fa-arrow-left"></i></button>
+            <button className="button-35 hiddenButton" onClick={() => openSide()}><i className="fa-solid fa-arrow-left"></i></button>
             <div style={styles.page}>
                 {cartContent.length > 0 ? 
                 <div className='grid'> 
@@ -81,7 +120,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
                         onClick={() => addCartDb(userId,cartContent)}>
                         Submit
                     </button>
-                    <button className='button-35' onClick={() => emptyCart()}><i class="fa-solid fa-trash"></i></button>
+                    <button className='button-35' onClick={() => emptyCart()}><i className="fa-solid fa-trash"></i></button>
                     <p style={{fontSize: '20px', background:'pink', borderRadius: '20px'}}>Total: {total} €</p>
                     <h3>Previously purchased</h3>
                         {last10().map((p) => (

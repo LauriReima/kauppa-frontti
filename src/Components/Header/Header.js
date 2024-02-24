@@ -9,25 +9,26 @@ function Header({admin, bgColor, color}) {
     const toggleDrop = () => {
         setDropBox(prev => !prev)
     }
+    
     return (
         <div className='header'>
             <button className='dropbtn' onClick={toggleDrop}>Menu</button>
             <div className='header-links'>
                 <Link to='/'>
-                    <button className='button-35' alt='home'><i class="fa-solid fa-house"></i></button>
+                    <button className='button-35' alt='home'><i className="fa-solid fa-house"></i></button>
                 </Link>
                 {!user && 
                 <Link to='/login'>
-                    <button className='button-35'><i class="fa-solid fa-user-plus"></i></button>
+                    <button className='button-35'><i className="fa-solid fa-user-plus"></i></button>
                 </Link>
                 }{
                 user === 'lauri' && 
                 <Link  to='/add'>
-                    <button className='button-35'><i class="fa-solid fa-plus"></i></button>
+                    <button className='button-35'><i className="fa-solid fa-plus"></i></button>
                 </Link>
                 }
                 <Link  to='/cart'>
-                    <button className='button-35'><i class="fa-solid fa-cart-shopping"></i></button> 
+                    <button className='button-35'><i className="fa-solid fa-cart-shopping"></i></button> 
                 </Link>
                 <select className='button-35' style={{maxWidth: '150px'}} value={color} onChange={bgColor}>
                     <option value='#c1dedb'>light</option>

@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+
 import ProductList from './Components/ProductList/ProductList';
 import productService from './services/product';
 import userService from './services/user'
@@ -17,8 +18,6 @@ import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer'
 
 import './App.css';
-
-
 
 
 function App() {
@@ -232,6 +231,7 @@ function App() {
     
   }
 
+
   return (
     <div style={{height: '100%',backgroundColor: color}}>
     <Router>
@@ -253,7 +253,8 @@ function App() {
             /> : 
             <div className='loggedName'>
               <p style={{fontSize: '28px', fontWeight: '500'}}>{loggedUser.username} logged in</p>
-              <button className='button-35' onClick={handleLogout}><i class="fa-solid fa-right-from-bracket"></i></button>
+              <button className='button-35' onClick={handleLogout}><i className="fa-solid fa-right-from-bracket"></i></button>
+              {/* <button onClick={() => userService.chatGPT('mitä kuuluu?')}>test</button> */}
             </div>
           }
       </div>

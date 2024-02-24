@@ -68,6 +68,7 @@
     .dropdown{
       display: block;
       position: relative;
+      width: 30px;
     }
     .show{
       background-color: rgb(105, 151, 146);
@@ -77,7 +78,7 @@
         align-items: center;
         height: auto;
         position: absolute;
-        left:-190px;
+        left: -150px;
         top:20px;
     }
   }

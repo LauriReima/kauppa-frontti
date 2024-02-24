@@ -1,5 +1,9 @@
 import axios from 'axios';
+import OpenAI from "openai";
 
+require('dotenv').config();
+const apiKey = process.env.API_KEY
+const openai = new OpenAI({apiKey:apiKey})
 const url = 'http://localhost:3001/api/users/'
 
 const getAll = async () =>{
@@ -23,6 +27,14 @@ const addToCart = async (userId, product) => {
     console.log(res.data, 'nappi');
     return res.data;
 }
+const chatGPT = async (word) => {
+    const completion = await openai.chat.completions.create({
+        messages: [{"role": "user", "content": word}],
+        model: "gpt-3.5-turbo",
+      });
+    
+      console.log(completion.choices[0].message);
+}
 
 // eslint-disable-next-line
-export default {  create, getAll, addToCart, getUserById }
+export default {  create, getAll, addToCart, getUserById, chatGPT }
