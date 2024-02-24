@@ -48,7 +48,6 @@
   border-radius: 6px;
 }
 
-
 .button-35 {
   align-items: center;
   background-color: #fff;
@@ -68,6 +67,7 @@
   padding: 0.6rem 1.0rem;
   text-align: center;
   text-decoration: none;
+  max-height: 40px;
 }
 
 .button-35:hover {
@@ -84,4 +84,16 @@
   outline: 2px solid #007bff;
 }
 
-
+.hiddenButton {
+  position: relative;
+  display: none    
+}
+@media (max-width: 766px) {
+  .sidebar {
+    display: none;
+  }
+  .hiddenButton {
+    display: block;
+    margin-left: 10px;
+  }
+}

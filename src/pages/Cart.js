@@ -16,11 +16,11 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
         localStorage.removeItem('cart')
         window.location.reload()
     }
-
+    
 
     const styles = {
         page: {
-            minHeight: '73vh',
+            minHeight: 'calc(100vh - 270px)',
             padding: '20px',
             display: 'grid',
             gridTemplateColumns: '70% 30%',
@@ -29,7 +29,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
         },
         card: {
             textAlign: 'center',
-            width: '200px',
+            maxWidth: '200px',
             height: '220px',
             background: badgeColor,
             borderRadius: '10px',
@@ -40,7 +40,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
             opacity: '0.4',
         },
         sidebar: {
-            width: '280px',
+            width: 'auto',
             height: '500px',
             padding: '10px',
             borderRadius: '10px',
@@ -53,10 +53,12 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
             padding: 0,
             border: 'solid teal',
             borderRadius: '13px'
-        }
+        },
     }
     const total = cartContent.reduce((sum, prod)=> sum + prod.price,0)
         return (
+            <>
+            <button className="button-35 hiddenButton"><i class="fa-solid fa-arrow-left"></i></button>
             <div style={styles.page}>
                 {cartContent.length > 0 ? 
                 <div className='grid'> 
@@ -73,7 +75,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
                     <h3>please add something to the cart!!</h3>
                 </div> 
                 }
-                <div style={styles.sidebar}>
+                <div className="sidebar" style={styles.sidebar}>
                     <button 
                         className='button-35' 
                         onClick={() => addCartDb(userId,cartContent)}>
@@ -90,6 +92,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
                         ))}
                 </div>
             </div>
+            </>
         )}
         export default CartPage;
 

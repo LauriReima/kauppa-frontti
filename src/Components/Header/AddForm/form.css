@@ -1,15 +1,26 @@
 .bar {
-    min-height: 73vh;
+    min-height: calc(100vh - 270px);
     position: relative;
     background-color: rgb(105, 151, 146);
     display: flex;
     justify-content: center;
     
 }
-.addForm > label > input,button {
-    border-radius: 6px;
+.addForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
-/* form {
-    min-height: 73vh;
-    
-} */
+.addForm > label {
+    margin-bottom: 17px;
+}
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.register > button {
+    margin-top: 20px;
+}

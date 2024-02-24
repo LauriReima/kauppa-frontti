@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import {
   Routes,
   BrowserRouter as Router,
-  Link,
   Route,
   Navigate,
 } from "react-router-dom";

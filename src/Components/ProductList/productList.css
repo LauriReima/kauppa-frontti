@@ -6,3 +6,6 @@
     gap: 20px;
     border: 10px;
 }
+.productPage{
+    min-height: calc(100vh - 270px)
+}

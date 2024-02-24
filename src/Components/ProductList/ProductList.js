@@ -18,32 +18,32 @@ const ProductList = ({searchInput, selectInput,  product, deleteP, handleSearch,
        
     if (product.length > 0){
         return (
-        <>
-        <Search 
-            // input={input}
-            handleSearch={handleSearch}
-            handleSelect={handleSelect}
-            inputColor={inputColor}
-            />
-        <div className='grid'>
-            {
-            //sorter(order)
-            categorize.map((p) => (
-            <Card 
-                key={p.id}
-                id={p.id}
-                name={p.name}
-                price={p.price}
-                category={p.category}
-                image={p.image}
-                deleteP={deleteP}
-                user={user}
-                addToCart={addToCart}
-                //flag={p.flags.png} 
-            />
-            ))}
+        <div className='productPage'>
+            <Search 
+                // input={input}
+                handleSearch={handleSearch}
+                handleSelect={handleSelect}
+                inputColor={inputColor}
+                />
+            <div className='grid'>
+                {
+                //sorter(order)
+                categorize.map((p) => (
+                <Card 
+                    key={p.id}
+                    id={p.id}
+                    name={p.name}
+                    price={p.price}
+                    category={p.category}
+                    image={p.image}
+                    deleteP={deleteP}
+                    user={user}
+                    addToCart={addToCart}
+                    //flag={p.flags.png} 
+                />
+                ))}
+            </div>
         </div>
-        </>
     );
     }else {
         return (

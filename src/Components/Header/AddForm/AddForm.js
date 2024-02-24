@@ -12,8 +12,8 @@ const AddForm = ({handleAddName, inputName, addProduct, handleCategory, inputCat
                     <input className='inputField' style={{backgroundColor: inputColor}} value={inputName} onChange={handleAddName}/>  
                 </label>
                 <label>
-                    <select className='button-35' style={{maxWidth: '150px'}} value={inputCategory} onChange={handleCategory}>
-                        <option  value='none'>Category</option>
+                    <select className='button-35' style={{maxWidth: '1500px'}} value={inputCategory} onChange={handleCategory}>
+                        <option  value='none'>Choose category</option>
                         <option value='armor'>Armor</option>
                         <option value='melee'>Melee</option>
                         <option value='range'>Range</option>

@@ -4,7 +4,7 @@ import AddForm from '../Components/Header/AddForm/AddForm';
 
 const AddProducts = ({addProduct, handleAddName, inputName,handleCategory, inputCategory, handlePrice, inputPrice, inputColor}) => {
     return (
-        <div className='addForm'>
+        <>
             
             <AddForm 
                 addProduct={addProduct}
@@ -16,7 +16,7 @@ const AddProducts = ({addProduct, handleAddName, inputName,handleCategory, input
                 inputPrice={inputPrice}
                 inputColor={inputColor}
             />
-        </div>
+        </>
     );
 };
 
