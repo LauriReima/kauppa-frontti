@@ -3,7 +3,7 @@
     position: relative;
     background-color: rgb(105, 151, 146);
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     
 }
 .addForm {
@@ -24,3 +24,18 @@
 .register > button {
     margin-top: 20px;
 }
+.answerBoard{
+    height: auto;
+    max-height: 350px;
+    margin-top: 10px;
+    width: 532px;
+    border-radius: 6px;
+    line-height: 1;
+    margin: 0;
+    outline: none;
+    font-size: 1.0rem;
+    padding: 0.6rem 1.0rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    overflow-y: auto;
+}
+

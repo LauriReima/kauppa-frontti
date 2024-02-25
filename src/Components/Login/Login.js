@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Login = ({inputColor, handleUserName, handlePassword, password, user, submit}) => {
-    console.log(inputColor);
     return (
         <>
             <form className='loginInput' onSubmit={submit}>

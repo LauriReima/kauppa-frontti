@@ -39,6 +39,14 @@
   font-size: 1.0rem;
   font-weight: 600;
 }
+.textAreaField{
+  border-radius: 6px;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  font-size: 1.0rem;
+  padding: 0.6rem 1.0rem
+}
 
 .searchBar{
   text-align: center;

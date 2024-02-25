@@ -1,10 +1,11 @@
 import axios from 'axios';
 import OpenAI from "openai";
 
-require('dotenv').config();
-const apiKey = process.env.API_KEY
-const openai = new OpenAI({apiKey:apiKey})
+const apiKey = process.env.REACT_APP_OPENAI_API_KEY
+
+const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true })
 const url = 'http://localhost:3001/api/users/'
+
 
 const getAll = async () =>{
     const req = axios.get(url)
@@ -32,8 +33,7 @@ const chatGPT = async (word) => {
         messages: [{"role": "user", "content": word}],
         model: "gpt-3.5-turbo",
       });
-    
-      console.log(completion.choices[0].message);
+    return completion.choices[0].message.content   
 }
 
 // eslint-disable-next-line

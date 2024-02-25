@@ -231,7 +231,6 @@ function App() {
     
   }
 
-
   return (
     <div style={{height: '100%',backgroundColor: color}}>
     <Router>
