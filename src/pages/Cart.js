@@ -16,6 +16,7 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
         position: 'fixed',
         transition: 'width 3s ease'
     })
+  
     const loggedUser = users.find((u) => u.username === user.username)
     const userId = loggedUser.id
     let last10 = () => {
@@ -93,11 +94,16 @@ const CartPage = ({ users, user, allProducts, addCartDb, cartContent}) => {
             border: 'solid teal',
             borderRadius: '13px'
         },
+        hiddenButton: {
+            left: sideVisible ? '0' : '300px'
+        }
     }
     const total = cartContent.reduce((sum, prod)=> sum + prod.price,0)
         return (
             <>
-            <button className="button-35 hiddenButton" onClick={() => openSide()}><i className="fa-solid fa-arrow-left"></i></button>
+            <button className="button-35 hiddenButton" style={styles.hiddenButton} onClick={() => openSide()}>
+                {sideVisible ? <i className="fa-solid fa-arrow-right"></i> : <i className="fa-solid fa-arrow-left"></i>}
+            </button>
             <div style={styles.page}>
                 {cartContent.length > 0 ? 
                 <div className='grid'> 

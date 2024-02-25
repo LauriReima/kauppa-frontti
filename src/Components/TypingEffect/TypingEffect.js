@@ -4,27 +4,27 @@ const TypingEffect = ({ sentence, question, inputColor }) => {
   const [displayedText, setDisplayedText] = useState('');
 
   useEffect(() => {
-    setDisplayedText('')
+    setDisplayedText('');
     if (sentence) {
-        const delay = 50; 
-        let index = -1;
+      const delay = 50;
+      let index = 0;
+  
+      const typingInterval = setInterval(() => {
+        setDisplayedText((prevText) => {
+          if (index < sentence.length) {
+            return prevText.concat(sentence[index]);
+          } else {
+            clearInterval(typingInterval);
+            return prevText;
+          }
+        });
+  
+        index += 1;
+      }, delay);
 
-        const typingInterval = setInterval(() => {
-            
-            setDisplayedText((prevText) => prevText.concat(sentence[index]));
-            index += 1;
-
-            if (index === sentence.length -1) {
-                clearInterval(typingInterval);
-            }
-            }, delay);
-
-        return () => {
-        clearInterval(typingInterval);
-        }
-    };
+    }
   }, [sentence]);
-
+console.log(displayedText);
   return (
     <div className='answerBoard' style={{backgroundColor: inputColor}}>
         {/* <div>{question}</div> */}
