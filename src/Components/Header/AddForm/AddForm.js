@@ -20,6 +20,7 @@ const AddForm = ({handleAddName, inputName, addProduct, handleCategory, inputCat
             console.error('Error fetching answer:', error);
         }
     }
+    console.log(answer);
     return (
         <div className='bar' >
             <form onSubmit={addProduct} className='addForm'>

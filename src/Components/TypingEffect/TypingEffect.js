@@ -4,7 +4,7 @@ const TypingEffect = ({ sentence, question, inputColor }) => {
   const [displayedText, setDisplayedText] = useState('');
 
   useEffect(() => {
-    setDisplayedText('');
+    setDisplayedText(' ');
     if (sentence) {
       const delay = 50;
       let index = 0;
@@ -24,7 +24,7 @@ const TypingEffect = ({ sentence, question, inputColor }) => {
 
     }
   }, [sentence]);
-console.log(displayedText);
+
   return (
     <div className='answerBoard' style={{backgroundColor: inputColor}}>
         {/* <div>{question}</div> */}
