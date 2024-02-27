@@ -3,7 +3,6 @@ import './card.css'
 
 function Card({name, price, category, image, id, deleteP, user, addToCart}) {
 
-    //const important = (!importance) ? "eipä kovinkaan" : "tärkeää"
     const styles = {
         card: {
             width: 'auto',

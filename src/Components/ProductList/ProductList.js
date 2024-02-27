@@ -27,7 +27,6 @@ const ProductList = ({searchInput, selectInput,  product, deleteP, handleSearch,
                 />
             <div className='grid'>
                 {
-                //sorter(order)
                 categorize.map((p) => (
                 <Card 
                     key={p.id}

@@ -43,8 +43,8 @@ function Header({admin, bgColor, color}) {
                     {user === 'lauri' && <Link className='link' to='/add'>Add</Link>}
                     <Link className='link' to='/cart'>Cart</Link> 
                     <select style={{backgroundColor: 'rgb(105, 151, 146)', fontSize: '15px'}} value={color} onChange={bgColor}>
-                        <option value='white'>White</option>
-                        <option value='grey'>Grey</option>
+                        <option value='#c1dedb'>light</option>
+                        <option value='#374543'>dark</option>
                         <option value='orange'>Orange</option>
                     </select>
                 </div>

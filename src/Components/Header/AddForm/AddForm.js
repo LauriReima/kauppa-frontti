@@ -17,7 +17,7 @@ const AddForm = ({handleAddName, inputName, addProduct, handleCategory, inputCat
             setAnswer(answ);
             setQuestion('')
         } catch (error) {
-            console.error('Error fetching answer:', error);
+            console.error('Virhe vastauksenhaussa:', error);
         }
     }
     console.log(answer);

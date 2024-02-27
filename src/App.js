@@ -72,6 +72,7 @@ function App() {
     e.preventDefault()
     setSearchInput(e.target.value)
   }
+  // lisätään ostoskoriin
   const handleAddCart = async (id) => {
     try {
       const item = await productService.getById(id)    
@@ -82,9 +83,10 @@ function App() {
       })     
   }
     catch (err) {
-      console.log(err)
+      console.log('ostoskoriin lisäys epäonnistui', err)
     }
   }
+  // lisätään tuote käyttäjän tietokantaan
   const addCartDb = async (userId,cContent) => {    
     try{
         let array = []
@@ -97,10 +99,9 @@ function App() {
         setCartContent([])
         window.location.reload()
     } catch (err) {
-        console.log(err);
+        console.log('tietokantaan lisäys epäonnistui',err);
     }
-}
-
+  }
   const handlePrice = (e) => {
     e.preventDefault()
     setNewPrice(e.target.value)
@@ -155,7 +156,6 @@ function App() {
   }
   const registerUser = (e) => {
     e.preventDefault()
-    
     const userObject = {
       username: registerName,
       password: registerPassword
@@ -226,7 +226,7 @@ function App() {
         setInputColor('yellow')
         break;
       default:
-        console.log('Unknown fruit.');
+        console.log('Something realted to color.');
     }
     
   }
@@ -253,7 +253,6 @@ function App() {
             <div className='loggedName'>
               <p style={{fontSize: '28px', fontWeight: '500'}}>{loggedUser.username} logged in</p>
               <button className='button-35' onClick={handleLogout}><i className="fa-solid fa-right-from-bracket"></i></button>
-              {/* <button onClick={() => userService.chatGPT('mitä kuuluu?')}>test</button> */}
             </div>
           }
       </div>
